@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useQuery } from "urql";
 import { PRODUCT_QUERY } from "../lib/query";
-// import Product from "../components/Products";
+import Product from "../components/Products";
 
 export default function Home() {
   // fetch the data from backend strapi
@@ -24,8 +24,8 @@ export default function Home() {
 
       <main>
         <h1>Hello Next.js!</h1>
-        {products.map((product) => (
-          <h1>{product.attributes.title}</h1>
+        {products.map((product, id) => (
+          <Product key={id} product={product} />
         ))}
       </main>
     </div>
