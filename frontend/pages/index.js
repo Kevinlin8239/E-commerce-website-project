@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useQuery } from "urql";
 import { PRODUCT_QUERY } from "../lib/query";
 import Product from "../components/Products";
-
+import { Gallery } from "../styles/Gallery";
 export default function Home() {
   // fetch the data from backend strapi
   const [results] = useQuery({ query: PRODUCT_QUERY });
@@ -12,7 +12,6 @@ export default function Home() {
   if (fetching) return <p>Loading...</p>;
   if (error) return <p>Ho noooooo {error.message}</p>;
   const products = data.products.data;
-  console.log(products);
 
   return (
     <div>
@@ -23,10 +22,11 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>Hello Next.js!</h1>
-        {products.map((product, id) => (
-          <Product key={id} product={product} />
-        ))}
+        <Gallery>
+          {products.map((product) => (
+            <Product key={product.attributes.Slug} product={product} />
+          ))}
+        </Gallery>
       </main>
     </div>
   );
